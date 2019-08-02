@@ -1,0 +1,14 @@
+1. Inversions: Let A[n] be an array of n distinct integers. If i < j and A[i] > A[j], then the
+pair (i, j) is called an inversion of A. Write a C/C++ program that determines the number
+of inversions in any permutation on n elements in ?(n lg n) worst-case time.
+(Hint: Modify merge sort)
+Example: A = {4, 1, 3, 2} output is 4
+
+2. ShareSpan: The share span problem is a financial problem where we have a sequence of n
+prices for a share for n consecutive days and we need to calculate span of share’s price for
+all n days. The span Si of the share’s price on a given day i is defined as the maximum
+number of consecutive days just before the i-th day, for which the price of the share on
+each of the days is less than or equal to its price on the i-th day.
+Example:
+Input: n = 7 and A[7]= {10, 9, 6, 7, 6, 7, 8}, then the
+Output: Span[7] = {1, 1, 1, 2, 1, 4, 5}
