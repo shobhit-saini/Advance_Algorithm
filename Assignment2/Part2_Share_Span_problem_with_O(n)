@@ -1,0 +1,47 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+int main()
+{
+	int n,span[n];
+	cout<<"Enter the no. of days:";
+	cin>>n;
+	int *arr=new int[n];
+    for(int i=0;i<n;i++)
+    {
+      cin>>arr[i];
+    }
+	stack <int> st;
+	st.push(0);
+	span[0]=1;
+    for(int i=1;i<n;i++)
+    {
+      if(arr[i]<=arr[st.top()])
+      {
+        span[i]=i-st.top();
+        st.push(i);
+      }
+      else
+      {
+        while(!st.empty()&&arr[st.top()]<arr[i])
+        {
+          st.pop();
+        }
+        if(st.empty())
+        {
+          st.push(i);
+          span[i]=i+1;
+        }
+        else
+        {
+          span[i]=i-st.top();
+          st.push(i);
+        }
+      }
+    }
+	cout<<"Span array:\n";
+    for(int i=0;i<n;i++)
+    {
+      cout<<"\n"<<span[i];
+    }
+}
