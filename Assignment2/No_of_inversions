@@ -1,0 +1,89 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+int count=0;
+int Merge(int *a, int low, int high, int mid)
+	{
+		int i, j, k;
+		int temp[high-low+1];
+		i = low;
+		k = 0;
+		j = mid + 1;
+	 
+		// Merge the two parts into auxillary array temp[].
+		while (i <= mid && j <= high)
+		{
+			if (a[i]<a[j])
+			{
+				temp[k] = a[i];
+				k++;
+				i++;
+			}
+			else if(a[i]>a[j])
+			{
+				temp[k] = a[j];
+				k++;
+				j++;
+				count=count+mid-i+1;
+			}
+		}
+	 
+		// Insert all the remaining elements from i to mid into temp[].
+		while (i <= mid)
+		{
+			temp[k] = a[i];
+			k++;
+			i++;
+		}
+	 
+		// Insert all the remaining elements from j to high into temp[].
+		while (j <= high)
+		{
+			temp[k] = a[j];
+			k++;
+			j++;
+		}
+	 
+	 
+		// Transfer the elements from auxillary array temp to a;
+		for (i = low; i <= high; i++)
+		{
+			a[i] = temp[i-low];//temp array starts from 0 that's why i-low
+		}
+return count;
+	}
+    //Main function of Mergesort
+	void MergeSort(int *a, int low, int high)
+	{
+		int mid,c;
+		if (low < high)
+		{
+			mid=(low+high)/2;
+			// Split the data into two half.
+			MergeSort(a, low, mid);
+			MergeSort(a, mid+1, high);
+			
+	 
+			// Merge them to get sorted output.
+			Merge(a, low, high, mid);
+		}
+    
+	}
+	int main()
+	{
+		int n,arr[100],i,a,b;
+		cout<<"Enter the size of an array:\n";
+		cin>>n;
+		for(i=0;i<n;i++)
+		{
+		cin>>arr[i];
+		}
+
+	   	MergeSort(arr, 0, n-1);
+	        cout<<"\nArray after sorting:";
+		for(i=0;i<n;i++)
+		{
+		cout<<arr[i]<<"\n";
+		}
+	  cout<<"No. of inversions:"<<count;
+	}
