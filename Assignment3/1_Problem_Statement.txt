@@ -1,0 +1,14 @@
+1. Round-Robin Elimination Problem: There are n people standing in a circle. In the first step,
+the counting starts at person 1 and proceeds around the circle, and the k-th person is eliminated.
+Next, the counting starts from the person next to the eliminated one, then k-1 people are
+skipped and the k-th person is eliminated. The elimination proceeds around the circle until the
+last person remains, who is the winner. Given n people and a number k, write a C program that
+outputs the winner.
+Example 1: If n = 5 and k = 2, then the winner is person 3.
+First, the person at position 2 is eliminated, then person at position 4 is eliminated, then person
+at position 1 is eliminated. Finally, the person at position 5 is eliminated. So the person at
+position 3 wins.
+Example 2: If n = 7 and k = 3, then the winner is person 4.
+First, the person at position 3 is eliminated, then person at position 6 is eliminated, then person
+at position 2 is eliminated, then person at position 2 is eliminated, then person at position 7 is
+eliminated. Finally, the person at position 1 is eliminated. So the person at position 4 wins.
