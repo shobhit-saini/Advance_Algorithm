@@ -1,0 +1,9 @@
+2. Given an array of n integers (not necessarily unique), write a C program that considers each
+integer in the array one-by-one, and inserts them in a linked list in non-descending order, and
+print the linked list. Write a C code to remove duplicates from the linked list, and print the
+resulting list. Given an integer k, write a C code to reverse every k integers in the linked list,
+and print the k-reversed list.
+Example: n = 10 A[] = {8, 7, 1, 1, 8, 9, 6, 3, 2, 4} k = 3, the output is as follows:
+1 1 2 3 4 6 7 8 8 9
+1 2 3 4 6 7 8 9
+3 2 1 7 6 4 9 8
