@@ -1,3 +1,5 @@
+#include<iostream>
+using namespace std;
 int main()
 	{
 		int N = 0,temp = 0, count = 1, i = 0;
