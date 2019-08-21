@@ -218,7 +218,7 @@ int main()
 	  string line;
 	  while(getline(Myfile,line))
 	  {
-	  	stringstream ss(line);//Divide the string into words
+	  	stringstream ss(line);//Used to divide into words
 	  	getline(ss,arr[size].name,',');
 	  	getline(ss,arr[size].roll_no,',');
 	  	getline(ss,arr[size].department,'\n');
