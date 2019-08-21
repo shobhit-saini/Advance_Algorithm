@@ -28,7 +28,7 @@ int main()
 			value=it->first;
 		}
 	}
-	if(max>=n/2)
+	if(max>n/2)
 	{
 		cout<<value;
 	}
