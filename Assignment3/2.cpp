@@ -32,6 +32,7 @@ using namespace std;
         {
             cin>>arr[i];
         }
+	    
 ////////////////////////////////INSERTING ONE BY ONE IN INCREASING ORDER/////////////////////////////
         struct node* p=new node;
         struct node* ptr1,*head,*ptr2;
@@ -75,13 +76,15 @@ using namespace std;
                 ptr1->next=p;
          	}        
         }
+	    
 /////////////////////////////////////PRINTING OF LINKED LIST////////////////////////////////
         ptr1=head;
         while(ptr1!=NULL)
         {
             cout<<ptr1->data<<"\t";
             ptr1=ptr1->next;
-        }    
+        }   
+	    
 ////////////////////////////////////REMOVE DUPLICATES FROM THE LIST///////////////////////
 		ptr1=head;
 		ptr2=ptr1->next;
@@ -115,6 +118,7 @@ using namespace std;
 				}
 			}
 		}
+	    
 ///////PRINTING THE ELEMENTS AFTER THE REMOVAL OF DUPLICATE ELEMENTS///////////
 		cout<<"\nPRINTING THE ELEMENTS AFTER THE REMOVAL OF DUPLICATE ELEMENTS:\n";
 		ptr1=head;
@@ -125,6 +129,7 @@ using namespace std;
             ptr1=ptr1->next;
             len++;
         }   
+	    
 //////////////////REVERSE EVERY K INTEGER IN THE LINKED LIST///////////////////
 		int k,m=1,q=1;
 		struct node* ptr,*head1,*head2,*head3;
