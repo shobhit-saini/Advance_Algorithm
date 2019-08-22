@@ -25,6 +25,7 @@ struct stud
 		    struct stud x;
 		    x=a[p];
 		    i=p;
+			
 		    for(j=p+1;j<=q;j++)
 		    {
 		        if(strcmp(a[j].name.c_str(),x.name.c_str())<0)
