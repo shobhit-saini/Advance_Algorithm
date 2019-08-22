@@ -13,6 +13,7 @@ int main()
     cin>>n;
     cout<<"Enter the interval of elimation:";
     cin>>k;
+    
 //////////////////CIRCULAR LINKED LIST CREATION////////////////////////////////
     struct cir* head=new struct cir();
     head->data=1;
@@ -32,6 +33,7 @@ int main()
     p->prev=ptr;
     p->next=head;
     head->prev=p;
+    
 //////////////////CIRCULAR LINKED LIST PRINT//////////////////////
     /*struct cir* ptr1;
     ptr1=head;
@@ -42,6 +44,7 @@ int main()
         cout<<ptr1->data<<"\n";
         ptr1=ptr1->next;
     }*/
+    
 //////////////////ELIMINATION PROCEDURE///////////////////////////
     struct cir* ptr2,*ptr3;
     ptr2=head;
