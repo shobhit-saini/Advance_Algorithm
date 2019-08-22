@@ -2,6 +2,7 @@
 #include<iostream>
 using namespace std;
 int count=0;
+
 int Merge(int *a, int low, int high, int mid)
 	{
 		int i, j, k;
