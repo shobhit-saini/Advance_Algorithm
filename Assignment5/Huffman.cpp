@@ -1,5 +1,8 @@
 #include<iostream>
 #include<math.h>
+#include<string>
+#include<cstring>
+#include<conio.h>
 using namespace std;
 
 struct Huffman
@@ -9,6 +12,9 @@ struct Huffman
 	struct Huffman *left;
 	struct Huffman *right;
 };
+
+string codearray[256];
+int k = 0;
 
 int Swap(struct Huffman *a, struct Huffman *b)
 {
@@ -129,7 +135,55 @@ int Insert(struct Huffman *ar, int N)
 		}
 	}	
 }
-	
+
+void codeformation(int ints[], int len, struct Huffman* node)  
+{  
+   /* int i; 
+	string str1; 
+    for (i = 0; i < len; i++)  
+    {  
+        str1.append(to_string(ints[i]));  
+    }  
+    codearray[int(node->data)] = str1;
+    //codearray[k].code = ;
+    k++; */
+}  
+
+void Pathstraversal(struct Huffman* node, string s)  
+{  
+    if (node == NULL)  
+        return;  
+      
+    /* it's a leaf, so print the path that led to here */
+    if (node->left == NULL && node->right == NULL)  
+    {  
+        codearray[int(node->data)] = s; 
+    }  
+    else
+    {  
+        /* otherwise try both subtrees */
+        Pathstraversal(node->left, s + '0');  
+        Pathstraversal(node->right, s + '1');  
+    }  
+}  
+
+void printInorder(struct Huffman* node) 
+{ 
+    if (node == NULL) 
+        return; 
+ /// cout << "hi";
+    /* first recur on left child */
+    printInorder(node->left); 
+  
+    /* then print the data of node */
+    cout << node->frequency << " "; 
+    //getch();
+  
+    /* now recur on right child */
+    printInorder(node->right); 
+    
+} 
+
 int main()
 {
 	int i = 0, N = 0;
@@ -156,49 +210,66 @@ int main()
 	}
 	
 	int temp = N, total;
-	struct Huffman Min1, Min2;
+	
 	int j = 1;
+	
+	////////////////Making of Huffman Tree//////////////////////
 	while(j <= temp - 1)
 	{
-		Min1 = ar[0];
-		cout << Min1.frequency << "\n";
+	    //////////////Extraction of first minimum/////////////////
+	    struct Huffman*	Min1 = new Huffman;
+	    *Min1 = ar[0];
+	    cout <<"add" <<&Min1;
+		cout <<"Min1:" << Min1->frequency << "\n";
 		N = Extract_min(ar, N);
-
-		cout << "First";
-		for(i = 0; i < N; i++)
-		{
-			cout <<  ar[i].data << "\t";
-			cout << ar[i].frequency << "\n";
-		}
-		Min2 = ar[0];
-		cout << Min2.frequency << "\n";
+		cout << "Heap After the Extract min:\n";
+    		for(i = 0; i < N; i++)
+    		{
+    			cout <<  ar[i].data << "\t";
+    			cout << ar[i].frequency << "\n";
+    		}
+    		
+		//////////////Extraction of second minimum/////////////////
+        struct Huffman*	Min2 = new Huffman;
+	    *Min2 = ar[0];
+		cout << "Min2:" << Min2->frequency << "\n";
 		N = Extract_min(ar, N);
-		cout<<"Second";
-		for(i = 0; i < N; i++)
-		{
-			cout <<  ar[i].data << "\t";
-			cout << ar[i].frequency << "\n";
-		}	
-		ar[N].frequency = Min1.frequency + Min2.frequency;
+		cout << "Heap After the Extract min:\n";
+    		for(i = 0; i < N; i++)
+    		{
+    			cout <<  ar[i].data << "\t";
+    			cout << ar[i].frequency << "\n";
+    		}	
+		cout <<"n:"<<N;
+		/////////////Making the new node///////////////////
+		ar[N].frequency = Min1->frequency + Min2->frequency;
 		ar[N].data = '\0';
-		ar[N].left = &Min1;
-		ar[N].right = &Min2;
+		ar[N].left = Min1;
+		ar[N].right = Min2;
 		N++;
-		cout<< "N" <<N;
+		cout<<"N:"<<N;
+		///////////Insert the new node into tree/////////
 		Insert(ar, N);
-		cout << "After insertion:\n"; 	
-		for(i = 0; i < N; i++)
-		{
-		cout <<  ar[i].data << "\t";
-		cout << ar[i].frequency << "\n";
-		}
-		cout << j;
+		cout << "Heap After insertion:\n"; 	
+    		for(i = 0; i < N; i++)
+    		{
+        		cout <<  ar[i].data << "\t";
+        		cout << ar[i].frequency << "\n";
+    		}
+	
 		j++;
 	}
 		cout << "After the Huffman algo.:\n";
-			cout <<  ar[0].data << "\t";
-			cout << ar[0].frequency << "\n";
-	
-	cout<< (ar[0].right)->frequency ;//<< "\t" <<ar->left->data;
-	
+		printInorder(&ar[0]);
+
+		string s, str1;
+	    Pathstraversal(&ar[0], s);
+	    cout << "Enter the string you want to send:\n";
+	    cin >> str1;
+	    for(int i = 0; i < strlen(str1.c_str()); i++)
+	    {
+	        cout<<codearray[int(str1[i])];
+	    }
+	    //cout<< (ar[0].right)->frequency ;//<< "\t" <<ar->left->data;
+	   // cout<<codearray[65];
 }
