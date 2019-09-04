@@ -2,7 +2,6 @@
 #include<math.h>
 #include<string>
 #include<cstring>
-#include<conio.h>
 using namespace std;
 
 struct Huffman
@@ -31,35 +30,31 @@ int Build_heap(struct Huffman *ar, int high)
 	int  temp = 0, i = 0, j = 0;
 	
 	//For loop from second last level
-		for(i = floor((high-1)/3); i >= 0; i--)
+		for(i = floor((high-2)/3); i >= 0; i--)
 		{
 			j = i;
 			
 			//Heapify from Top
-			while(j <= floor((high-1)/3))
+			while(j <= floor((high-2)/3))
 			{
-				if(2*j + 3 >= high)
+				if((3*j + 2 < high) && (3*j + 3 < high))
 				{
-					break;
-				}
-				if((2*j + 2 < high) && (2*j + 3 < high))
-				{
-					if((ar[j].frequency > ar[2*j + 1].frequency) || (ar[j].frequency > ar[2*j + 2].frequency) || (ar[j].frequency > ar[2*j + 3].frequency))
+					if((ar[j].frequency > ar[3*j + 1].frequency) || (ar[j].frequency > ar[3*j + 2].frequency) || (ar[j].frequency > ar[3*j + 3].frequency))
 					{
-						if((ar[2*j + 1].frequency < ar[2*j + 2].frequency) && (ar[2*j + 1].frequency < ar[2*j + 3].frequency))
+						if((ar[3*j + 1].frequency < ar[3*j + 2].frequency) && (ar[3*j + 1].frequency < ar[3*j + 3].frequency))
 						{
-							Swap(&ar[j], &ar[2*j + 1]);
-							j = 2*j + 1;
+							Swap(&ar[j], &ar[3*j + 1]);
+							j = 3*j + 1;
 						}
-							else if (ar[2*j + 2].frequency < ar[2*j + 3].frequency)
+							else if (ar[3*j + 2].frequency < ar[3*j + 3].frequency)
 							{
-								Swap(&ar[j], &ar[2*j + 2]);
-								j = 2*j + 2;
+								Swap(&ar[j], &ar[3*j + 2]);
+								j = 3*j + 2;
 							}
 									else
 									{
-										Swap(&ar[j], &ar[2*j + 3]);
-										j = 2*j + 3;
+										Swap(&ar[j], &ar[3*j + 3]);
+										j = 3*j + 3;
 									}
 					}
 					
@@ -70,19 +65,19 @@ int Build_heap(struct Huffman *ar, int high)
 						
 				}
 				
-				else if((2*j +2 < high))
+				else if((3*j +2 < high))
 				{
-					if((ar[j].frequency > ar[2*j + 1].frequency) || (ar[j].frequency > ar[2*j + 2].frequency))
+					if((ar[j].frequency > ar[3*j + 1].frequency) || (ar[j].frequency > ar[3*j + 2].frequency))
 					{
-						if((ar[2*j + 1].frequency < ar[2*j + 2].frequency))
+						if((ar[3*j + 1].frequency < ar[3*j + 2].frequency))
 						{
-							Swap(&ar[j], &ar[2*j + 1]);
-							j = 2*j + 1;
+							Swap(&ar[j], &ar[3*j + 1]);
+							j = 3*j + 1;
 						}
 							else
 							{
-								Swap(&ar[j], &ar[2*j + 2]);
-								j = 2*j + 2;
+								Swap(&ar[j], &ar[3*j + 2]);
+								j = 3*j + 2;
 							}
 					}
 					
@@ -93,10 +88,10 @@ int Build_heap(struct Huffman *ar, int high)
 						
 				}
 				
-					else if(ar[j].frequency > ar[2*j + 1].frequency)
+					else if(ar[j].frequency > ar[3*j + 1].frequency)
 					{
-						Swap(&ar[j], &ar[2*j + 1]);
-							j = 2*j + 1;
+						Swap(&ar[j], &ar[3*j + 1]);
+							j = 3*j + 1;
 					}
 						else
 						{
@@ -108,47 +103,80 @@ int Build_heap(struct Huffman *ar, int high)
 return 0;
 }
 
-/*int Extract_min(struct Huffman *ar, int high)
+int Extract_min(struct Huffman *ar, int high)
 {
 
-	int i = 0;
+	int j = 0;
 	Swap(&ar[0], &ar[high - 1]);
-	
 	high = high - 1;
+	if(high == 1)
+	{
+		return high;
+	}
 	
-	while(i <= floor(high/2) - 1)
+	//Heapify from Top
+			while(j <= floor((high-2)/3))
 			{
-				if((2*i +2 < high))
+				if((3*j + 2 < high) && (3*j + 3 < high))
 				{
-					if((ar[i].frequency > ar[2*i + 1].frequency) || (ar[i].frequency > ar[2*i + 2].frequency))
+					if((ar[j].frequency > ar[3*j + 1].frequency) || (ar[j].frequency > ar[3*j + 2].frequency) || (ar[j].frequency > ar[3*j + 3].frequency))
 					{
-						if((ar[2*i + 1].frequency < ar[2*i + 2].frequency))
+						if((ar[3*j + 1].frequency < ar[3*j + 2].frequency) && (ar[3*j + 1].frequency < ar[3*j + 3].frequency))
 						{
-							Swap(&ar[i], &ar[2*i + 1]);
-							i = 2*i + 1;
+							Swap(&ar[j], &ar[3*j + 1]);
+							j = 3*j + 1;
 						}
-						else
-						{
-							Swap(&ar[i], &ar[2*i + 2]);
-							i = 2*i + 2;
-						}
+							else if (ar[3*j + 2].frequency < ar[3*j + 3].frequency)
+							{
+								Swap(&ar[j], &ar[3*j + 2]);
+								j = 3*j + 2;
+							}
+									else
+									{
+										Swap(&ar[j], &ar[3*j + 3]);
+										j = 3*j + 3;
+									}
 					}
 					
-					else
-					{
-						break;
-					}
+						else
+						{
+							break;
+						}
 						
 				}
-				else if(ar[i].frequency > ar[2*i + 1].frequency)
+				
+				else if((3*j +2 < high))
 				{
-					Swap(&ar[i], &ar[2*i + 1]);
-					i = 2*i + 1;
+					if((ar[j].frequency > ar[3*j + 1].frequency) || (ar[j].frequency > ar[3*j + 2].frequency))
+					{
+						if((ar[3*j + 1].frequency < ar[3*j + 2].frequency))
+						{
+							Swap(&ar[j], &ar[3*j + 1]);
+							j = 3*j + 1;
+						}
+							else
+							{
+								Swap(&ar[j], &ar[3*j + 2]);
+								j = 3*j + 2;
+							}
+					}
+					
+						else
+						{
+							break;
+						}
+						
 				}
-				else
-				{
-					break;
-				}
+				
+					else if(ar[j].frequency > ar[3*j + 1].frequency)
+					{
+						Swap(&ar[j], &ar[3*j + 1]);
+							j = 3*j + 1;
+					}
+						else
+						{
+							break;
+						}
 			}
 return high;
 }
@@ -170,7 +198,7 @@ int Insert(struct Huffman *ar, int N)
 	}	
 }
 
-void codeformation(int ints[], int len, struct Huffman* node)  
+/*void codeformation(int ints[], int len, struct Huffman* node)  
 {  
    /* int i; 
 	string str1; 
@@ -181,7 +209,7 @@ void codeformation(int ints[], int len, struct Huffman* node)
     codearray[int(node->data)] = str1;
     //codearray[k].code = ;
     k++; 
-}  
+}*/  
 
 void Pathstraversal(struct Huffman* node, string s)  
 {  
@@ -189,7 +217,7 @@ void Pathstraversal(struct Huffman* node, string s)
         return;  
       
     ///////////it's a leaf
-    if (node->left == NULL && node->right == NULL)  
+    if (node->left == NULL && node->middle == NULL && node->right == NULL)  
     {  
         codearray[int(node->data)] = s; 
     }  
@@ -197,7 +225,8 @@ void Pathstraversal(struct Huffman* node, string s)
     {  
         //otherwise try both subtrees 
         Pathstraversal(node->left, s + '0');  
-        Pathstraversal(node->right, s + '1');  
+        Pathstraversal(node->middle, s + '1'); 
+        Pathstraversal(node->right, s + '2');  
     }  
 }  
 
@@ -207,12 +236,12 @@ void printInorder(struct Huffman* node)
         return; 
  /// cout << "hi";
     printInorder(node->left); 
-  
+    printInorder(node->middle); 
     cout << node->frequency << " "; 
     
     printInorder(node->right); 
     
-} */
+} 
 
 int main()
 {
@@ -245,12 +274,11 @@ int main()
 	int j = 1;
 	
 	////////////////Making of Huffman Tree//////////////////////
-/*	while(j <= temp - 1)
+	while(N != 1)
 	{
 	    //////////////Extraction of first minimum/////////////////
-	    struct Huffman*	Min1 = new Huffman;
-	    *Min1 = ar[0];
-	    cout <<"add" <<&Min1;
+	    struct Huffman* Min1 = new Huffman;
+	    	*Min1 = ar[0];
 		cout <<"Min1:" << Min1->frequency << "\n";
 		N = Extract_min(ar, N);
 		cout << "Heap After the Extract min:\n";
@@ -261,8 +289,8 @@ int main()
     		}
     		
 		//////////////Extraction of second minimum/////////////////
-        struct Huffman*	Min2 = new Huffman;
-	    *Min2 = ar[0];
+        	struct Huffman*	Min2 = new Huffman;
+	    	*Min2 = ar[0];
 		cout << "Min2:" << Min2->frequency << "\n";
 		N = Extract_min(ar, N);
 		cout << "Heap After the Extract min:\n";
@@ -271,14 +299,40 @@ int main()
     			cout <<  ar[i].data << "\t";
     			cout << ar[i].frequency << "\n";
     		}	
-		cout <<"n:"<<N;
-		/////////////Making the new node///////////////////
-		ar[N].frequency = Min1->frequency + Min2->frequency;
-		ar[N].data = '\0';
-		ar[N].left = Min1;
-		ar[N].right = Min2;
-		N++;
-		cout<<"N:"<<N;
+    		
+    		//////////////Extraction of third minimum/////////////////
+       		 struct Huffman* Min3 = new Huffman;
+       		 if(N != 0)
+	       		 {
+			    	*Min3 = ar[0];
+				cout << "Min3:" << Min3->frequency << "\n";
+				N = Extract_min(ar, N);
+				cout << "Heap After the Extract min:\n";
+		    		for(i = 0; i < N; i++)
+		    		{
+		    			cout <<  ar[i].data << "\t";
+		    			cout << ar[i].frequency << "\n";
+		    		}
+	    			
+			//cout <<"n:"<<N;
+			/////////////Making the new node///////////////////
+			ar[N].frequency = Min1->frequency + Min2->frequency + Min3->frequency;
+			ar[N].data = '\0';
+			ar[N].left = Min1;
+			ar[N].middle = Min2;
+			ar[N].right = Min3;
+			N++;
+		}
+		else
+		{
+			ar[N].frequency = Min1->frequency + Min2->frequency;
+			ar[N].data = '\0';
+			ar[N].left = Min1;
+			ar[N].middle = Min2;
+			ar[N].right = NULL;
+			N++;
+		}
+		//cout<<"N:"<<N;
 		///////////Insert the new node into tree/////////
 		Insert(ar, N);
 		cout << "Heap After insertion:\n"; 	
@@ -288,7 +342,7 @@ int main()
         		cout << ar[i].frequency << "\n";
     		}
 	
-		j++;
+		//j++;
 	}
 		cout << "After the Huffman algo.:\n";
 		printInorder(&ar[0]);
