@@ -355,6 +355,4 @@ int main()
 	    {
 	        cout<<codearray[int(str1[i])];
 	    }
-	    //cout<< (ar[0].right)->frequency ;//<< "\t" <<ar->left->data;
-	   // cout<<codearray[65];*/
 }
