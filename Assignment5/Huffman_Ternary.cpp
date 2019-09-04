@@ -242,6 +242,31 @@ void printInorder(struct Huffman* node)
     printInorder(node->right); 
     
 } 
+void Decoder(struct Huffman* node, string str)
+{
+	struct Huffman* temp = node;
+	int i = 0;
+	for(i = 0; i < strlen(str.c_str()); i++)
+	{
+		if(str[i] == '0')
+		{
+			temp = temp->left;
+		}
+		else if(str[i] == '1')
+		{
+			temp = temp->middle;
+		}
+		else if(str[i] == '2')
+		{
+			temp = temp->right;
+		}
+		if(temp->left == NULL && temp->middle == NULL && temp->right == NULL)
+		{
+			cout<<temp->data;
+			temp = node;	
+		}
+	}
+}
 
 int main()
 {
@@ -344,15 +369,20 @@ int main()
 	
 		//j++;
 	}
-		cout << "After the Huffman algo.:\n";
+		cout << "Huffman Tree:\n";
 		printInorder(&ar[0]);
 
-		string s, str1;
+		string s, str1, encoded;
 	    Pathstraversal(&ar[0], s);
-	    cout << "Enter the string you want to send:\n";
+	    cout << "\nEnter the string you want to send:";
 	    cin >> str1;
+	    cout << "Encoded string:";
 	    for(int i = 0; i < strlen(str1.c_str()); i++)
 	    {
-	        cout<<codearray[int(str1[i])];
+	        encoded += codearray[int(str1[i])];
+	        cout << codearray[int(str1[i])];
 	    }
+	    
+	    cout << "\nDecoded string:";
+	    Decoder(&ar[0], encoded);
 }
