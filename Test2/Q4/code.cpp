@@ -1,4 +1,5 @@
 #include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 int *Merge(int* start, int* end, int m)
 {
@@ -39,20 +40,58 @@ int *Merge(int* start, int* end, int m)
 }
 int main()
 {
-	int m, i;
+	int m, i, k;
 	cout << "Enter the no. of variable:";
 	cin >> m;
 	int start[m];
 	int end[m];
-	int *result;
+	int result[m];
 	for(i = 0; i < m; i++)
 	{
 		cin >> start[i];
 		cin >> end[i];
 	}
-	result = Merge(start, end, m);
-	for(i = 0; i < m; i++)
+	sort(start, start + m);
+	sort(end, end + m);
+	i = 0; 
+	int j = 0; 
+	k = 0;
+	while(i < m && j < m)
 	{
-		cout << result[i];
+		if(start[i] <= end[j])
+		{
+			result[k] = 1;
+			i++;
+			k++;
+		}
+		else
+		{
+			result[k] = 0;
+			j++;
+			k++;
+		}
 	}
+	while(i < m)
+	{
+		result[k] = 1;
+		i++;
+		k++;
+	}
+	while(j < m)
+	{
+		result[k] = 0;
+		j++;
+		k++;
+	}
+	/*result = Merge(start, end, m);*/
+	int var = 0;
+	for(i = 0; i < k; i++)
+	{
+	   
+	    /*if(result[i] == 1)
+	        var++;
+	            else if(var > 0)
+	                var--;*/
+	}
+	cout << var;
 }
