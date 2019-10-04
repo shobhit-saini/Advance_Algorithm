@@ -74,6 +74,8 @@ int main()
 	     else if(var > 0)
 	                var--;
 	}
+	
+	//Printing of max. no. of variable required 
 	cout << max;
 }
 
