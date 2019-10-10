@@ -9,7 +9,7 @@ int addedge(vector<int> adj[], int u, int v)
 }
 int main()
 {
-	int v, u, V, ch;
+	int v, u, V, ch, i;
 	cout << "Enter the no. of vertices:";
 	cin >> V;
 	vector<int> adj[V];
@@ -28,6 +28,18 @@ int main()
 		}
 	}
 	
+	/////////////////Printing of graph//////////////////////////////////
+	cout << "Adjacency list of graph:\n";
+	vector<int>:: iterator itr;
+	for(i = 0; i < V; i++)
+	{
+		cout << i ;
+		for(itr = adj[i].begin(); itr != adj[i].end(); itr++)
+		{
+			cout << "->" << *itr ;
+		}
+		cout << "\n";
+	}
 	
 	
 }
