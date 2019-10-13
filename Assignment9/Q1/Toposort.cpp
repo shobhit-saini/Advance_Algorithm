@@ -7,7 +7,6 @@ using namespace std;
 int addedge(vector<int> adj[], int u, int v)
 {
 	adj[u].push_back(v);
-	//adj[v].push_back(u);
 }
 
 int DFT(vector<int> adj[], int s, bool visited[], int T[], int V)
